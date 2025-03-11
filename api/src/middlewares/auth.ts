@@ -1,4 +1,4 @@
-import { Unauthorized } from "../errors/Unauthorized";
+import { Unauthorized } from "../errors/unauthorized";
 import jwt from "jsonwebtoken";
 
 export const auth = (req, res, next) => {

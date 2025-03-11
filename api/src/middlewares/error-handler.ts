@@ -1,10 +1,10 @@
-import { ArgumentError } from "../errors/Argument";
-import { BadRequest } from "../errors/BadRequest";
-import { NotFound } from "../errors/NotFound";
-import { Unauthorized } from "../errors/Unauthorized";
+import { ArgumentError } from "../errors/argument";
+import { BadRequest } from "../errors/bad-request";
+import { NotFound } from "../errors/not-found";
+import { Unauthorized } from "../errors/unauthorized";
 import { container } from "../ioc-container";
 import { types } from "../ioc-types";
-import { ILogger } from "../services/logger";
+import { ILogService } from "../services/log";
 
 export const errorHandler = async (err, req, res, next) =>{
     if(err instanceof(BadRequest) || err instanceof(ArgumentError)){
@@ -19,7 +19,7 @@ export const errorHandler = async (err, req, res, next) =>{
         res.status(404).send({ status_code: 404, message: err.message});
         return next();
     }
-    const logger = container.get<ILogger>(types.Logger);
+    const logger = container.get<ILogService>(types.Logger);
     const logId = await logger.log("error", err.message, {
         request:{
             params: req.params,

@@ -1,5 +1,5 @@
 import express from 'express';
-import { NotFound } from '../../errors/NotFound';
+import { NotFound } from '../../errors/not-found';
 import { MongoClient, ObjectId } from 'mongodb';
 import { IPagedList } from '../../dtos/paged-list';
 import { IFilter } from '../../dtos/filter';
@@ -49,7 +49,7 @@ logRoutes.get('/:id', async (req, res, next) => {
     try{
         if(!ObjectId.isValid(id))
             throw new NotFound(`resource does not exist`);
-        var user = 
+        const user = 
          await mongoClient
             .db("cms")
             .collection<ILogItem>("logs")

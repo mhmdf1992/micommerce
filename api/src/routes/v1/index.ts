@@ -1,7 +1,7 @@
 import express from 'express';
-import { userRoutes } from './user-routes';
-import { logRoutes } from './log-routes';
-import { authRoutes } from './auth-routes';
+import { userRoutes } from './user';
+import { logRoutes } from './log';
+import { authRoutes } from './auth';
 import { adminAuth } from '../../middlewares/admin-auth';
 export const routes = express.Router();
 routes.use('/auth', authRoutes);

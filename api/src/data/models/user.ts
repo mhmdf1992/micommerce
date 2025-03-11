@@ -7,10 +7,8 @@ export interface IUser{
     firstname: string;
     lastname: string;
     created_on: Date;
-    tenant_id: string;
     metadata: {
         role: Role;
-        access_routes: string[]
         disabled: boolean;
     };
 }

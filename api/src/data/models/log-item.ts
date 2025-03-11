@@ -5,8 +5,7 @@ export interface ILogItem{
     type: string;
     created_on: Date;
     message: string;
-    tenant_id: string
-    metadata:{
+    metadata: {
         
     };
 }

@@ -1,15 +1,15 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { IUser } from "../data/models/user";
-import { ArgumentError } from "../errors/Argument";
+import { ArgumentError } from "../errors/argument";
 import { ICreateUser } from "../dtos/user/create-user";
 import { IPagedList } from "../dtos/paged-list";
 import { IFilter } from "../dtos/filter";
 import { AggregateBuilder } from "../data/helpers/aggregate-builder";
 import { IUpdateUser } from "../dtos/user/update-user";
-import { NotFound } from "../errors/NotFound";
-import { Unauthorized } from "../errors/Unauthorized";
+import { NotFound } from "../errors/not-found";
+import { Unauthorized } from "../errors/unauthorized";
 import { ILoginResponse } from "../dtos/auth/login-response";
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { injectable } from "inversify";
 
 export interface IUserService{
@@ -110,7 +110,6 @@ export class UserService implements IUserService{
     }
 
     public delete = async (id: string): Promise<void> => {
-        const user = 
          await this.
             _mongoClient
                 .db("cms")
@@ -194,9 +193,6 @@ export class UserService implements IUserService{
     public static isValidPassword = (password: string): boolean => 
         /[a-zA-Z0-9_.@$]{6,24}$/.test(password);
 
-    // public static isValidRole = (role: string): boolean =>
-    //     this.ROLES.includes(role);
-
     public static validateUsername = (username: string) =>{
         if(!UserService.isValidUsername(username))
             throw new ArgumentError("username", "Username is not valid. Username must start with a letter minimum 6 and maximum 24 characters. Allowed characters are a-z (only lower case), 0-9, '_' (underscore) and '.' (dot).");
@@ -206,11 +202,6 @@ export class UserService implements IUserService{
         if(!UserService.isValidPassword(password))
             throw new ArgumentError("password", "Password is not valid. Password should be minimum 6 charecters and maximum 24. Allowed characters are a-z, A-Z, 0-9, '@', '$', '_' and '.'");
     }
-
-    // public static validateRole = (role: string) =>{
-    //     if(!this.isValidRole(role))
-    //         throw new ArgumentError("role", `Role is not valid. Allowed roles are ${this.ROLES.join(',')}`);
-    // }
 
     public static isValidId = (id: string) => ObjectId.isValid(id);
 

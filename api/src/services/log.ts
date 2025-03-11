@@ -1,13 +1,12 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { ILogItem } from "../data/models/log-item";
-import { inject, injectable } from "inversify";
-import { types } from "../ioc-types";
+import { injectable } from "inversify";
 
-export interface ILogger{
+export interface ILogService{
     log(type: string, message: string, metadata: any): Promise<ObjectId>;
 }
 @injectable()
-export class Logger implements ILogger{
+export class LogService implements ILogService{
     _mongoClient: MongoClient;
     constructor(mongoClient: MongoClient){
         this._mongoClient = mongoClient;
